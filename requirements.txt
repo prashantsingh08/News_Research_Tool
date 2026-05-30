@@ -1,0 +1,9 @@
+# requirements.txt
+# ── Core ──────────────────────────────────────────────────────
+streamlit==1.33.0
+langchain==0.1.20
+langchain-openai==0.1.6
+langchain-groq==0.1.0
+openai==1.30.0
+newsapi-python==0.2.7
+python-dotenv==1.0.1
