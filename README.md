@@ -1,121 +1,148 @@
-# 📰 Equity Research News Tool
+# 📰 News Research Tool — Complete LLM Project
 
-An AI-powered news research tool built with **LangChain**, **OpenAI**, **NewsAPI**, and **Streamlit**.  
-Enter any company or financial topic and get real-time news fetched and summarized by AI instantly.
+> AI-powered multilingual news summarizer using Groq LLaMA 3.3, 4 news APIs, and Streamlit.
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```
 news_research_tool/
 │
-├── app.py                  # Streamlit frontend (UI)
-├── langchain_config.py     # LangChain + OpenAI + NewsAPI logic
-├── requirements.txt        # Python dependencies
-├── .env.example            # API key template (copy to .env)
-└── README.md               # This file
+├── app.py                  ← Main Streamlit UI
+├── langchain_config.py     ← Groq LLM + LangChain summarization
+├── news_fetcher.py         ← 4 news API integration (NewsAPI, GNews, Guardian, NewsData)
+├── translator.py           ← Multilingual translation (deep-translator)
+├── pdf_generator.py        ← PDF + TXT export
+├── languages.py            ← 24 language config + query detection
+│
+├── .streamlit/
+│   └── config.toml         ← Base Streamlit theme
+│
+├── .env                    ← Your API keys (pre-filled)
+├── .gitignore
+├── requirements.txt
+├── setup.sh                ← One-click setup (Mac/Linux)
+├── setup.bat               ← One-click setup (Windows)
+└── README.md
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚡ Quick Start
 
-### Step 1 — Clone or download the project
+### Mac / Linux
 ```bash
-git clone https://github.com/your-username/news-research-tool
-cd news_research_tool
-```
-
-### Step 2 — Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 3 — Add your API keys
-```bash
-cp .env.example .env
-```
-Then open `.env` and fill in:
-```
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
-NEWSAPI_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-### Step 4 — Run the app
-```bash
+bash setup.sh
+source venv/bin/activate
 streamlit run app.py
 ```
-The app will open at `http://localhost:8501`
 
----
-
-## 🔑 Getting API Keys
-
-| Service | Link | Free Tier |
-|---------|------|-----------|
-| OpenAI | https://platform.openai.com/api-keys | $5 free credits |
-| NewsAPI | https://newsapi.org/register | 100 req/day free |
-
----
-
-## 🚀 How It Works
-
+### Windows
 ```
-User enters query
-      ↓
-NewsAPI fetches top 10 relevant articles
-      ↓
-Article titles + descriptions extracted
-      ↓
-LangChain formats them into a prompt
-      ↓
-OpenAI GPT generates a structured summary
-      ↓
-Streamlit displays summary + article cards
+setup.bat
+venv\Scripts\activate
+streamlit run app.py
 ```
 
----
-
-## 💡 Example Queries
-- `Tesla Q1 2024 earnings`
-- `RBI monetary policy India`
-- `Infosys revenue guidance`
-- `US Fed rate cut 2024`
-- `Reliance Jio 5G expansion`
+App opens at → **http://localhost:8501**
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-| Tool | Purpose |
-|------|---------|
-| Python 3.10+ | Core language |
-| Streamlit | Web UI |
-| LangChain | LLM orchestration |
-| OpenAI GPT | AI summarization |
-| NewsAPI | News data source |
-| python-dotenv | Secure key management |
-
----
-
-## 📦 Optional Enhancements (Phase 7)
-- [ ] User authentication (Streamlit-Authenticator)
-- [ ] Save query history to CSV / SQLite
-- [ ] Export summaries as PDF
-- [ ] Add sentiment analysis (Positive / Neutral / Negative)
-- [ ] Deploy on Streamlit Cloud (free hosting)
+| Feature | Details |
+|---------|---------|
+| 🤖 AI Summarization | Groq LLaMA 3.3-70b (free, ultra-fast) |
+| 📡 4 News Sources | NewsAPI + GNews + The Guardian + NewsData.io |
+| 🌐 24 Languages | Hindi, Urdu, Japanese, Mandarin, Spanish + more |
+| 🗣️ Smart Query | Type "show in Hindi" — auto-detects language |
+| 🔄 No Re-search | Language switch translates existing summary only |
+| 📅 Date Range | Filter news by custom date range |
+| 📂 Categories | Sports, Politics, Health, Tech, Environment, Disasters |
+| 🌙 Dark/Light | Theme toggle at top-right (no page reload) |
+| 🔘 Article Toggle | Show/hide source articles with toggle switch |
+| ⬇️ Export | Download as PDF, TXT, or JSON |
+| 📊 Stats Cards | Articles count, sources, word count, model info |
 
 ---
 
-## 🚢 Deployment (Streamlit Cloud — Free)
-1. Push code to GitHub
+## 🌐 Supported Languages (24)
+
+English · Spanish · Portuguese · German · Dutch · Russian ·
+Japanese · Korean · Mandarin · French · Italian · Arabic ·
+Swedish · Norwegian · Polish · Turkish ·
+Hindi · Urdu · Bengali · Tamil · Telugu · Marathi · Gujarati ·
+Kannada · Malayalam · Punjabi
+
+**Two ways to select language:**
+1. Sidebar dropdown → instantly re-translates without re-searching
+2. Type in query: `"Ukraine war in Hindi"` → auto-detects Hindi
+
+---
+
+## 🔎 News Categories
+
+- 🔍 All (default)
+- 💼 Business
+- 🎭 Entertainment
+- 🏥 Health
+- 🔬 Science
+- ⚽ Sports
+- 💻 Technology
+- 🌍 General / Politics
+- 🌦️ Weather & Environment
+- 💥 Disasters & Crisis
+- 📜 Policy & Governance
+
+---
+
+## 🤖 AI Model
+
+| Setting | Value |
+|---------|-------|
+| Provider | Groq (free) |
+| Model | llama-3.3-70b-versatile |
+| Temperature | 0.3 (factual) |
+| Max tokens | 1800 |
+
+---
+
+## 🔑 API Keys (pre-configured in .env)
+
+| Service | Key | Free Limit |
+|---------|-----|-----------|
+| Groq | GROQAI_API_KEY | Generous free tier |
+| NewsAPI | NEWSAPI_KEY | 100 req/day |
+| GNews | GNEWSAPI_KEY | 100 req/day |
+| The Guardian | THEGUARDIAN_KEY | Unlimited (free) |
+| NewsData.io | NEWSDATA_KEY | 200 req/day |
+
+---
+
+## 🚢 Deploy Free on Streamlit Cloud
+
+1. Push to GitHub (exclude `.env` via `.gitignore`)
 2. Go to https://share.streamlit.io
-3. Connect your repo
-4. Add API keys in **Secrets** settings
-5. Click **Deploy** — live in 2 minutes!
+3. Connect your repo → select `app.py`
+4. Add secrets (Settings → Secrets):
+```toml
+GROQAI_API_KEY = "gsk_..."
+NEWSAPI_KEY = "..."
+GNEWSAPI_KEY = "..."
+THEGUARDIAN_KEY = "..."
+NEWSDATA_KEY = "..."
+```
+5. Click **Deploy** → live in 2 minutes!
 
 ---
 
-## 👤 Author
-Built as part of LLM + Data Science project portfolio.
+## 🐛 Bugs Fixed from Original Code
+
+| Bug | Fix |
+|-----|-----|
+| `result.strip()` crashed (AIMessage object) | Fixed to `result.content.strip()` |
+| `language="en"` hardcoded | Now dynamic from user selection |
+| `from streamlit import logger` unused | Removed |
+| Language change triggered re-search | Fixed: translates stored summary only |
+| Single news source | Now uses 4 APIs with deduplication |

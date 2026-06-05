@@ -1,9 +1,25 @@
+# ============================================================
 # requirements.txt
-# ── Core ──────────────────────────────────────────────────────
-streamlit==1.33.0
-langchain==0.1.20
-langchain-openai==0.1.6
-langchain-groq==0.1.0
-openai==1.30.0
-newsapi-python==0.2.7
+# Install: pip install -r requirements.txt
+# ============================================================
+
+# ── Streamlit UI ──────────────────────────────────────────────
+streamlit==1.38.0
+
+# ── LangChain + Groq LLM ──────────────────────────────────────
+langchain==0.2.16
+langchain-core==0.2.41
+langchain-groq==0.1.9
+
+# ── News APIs ─────────────────────────────────────────────────
+newsapi-python==0.2.7        # NewsAPI
+requests==2.32.3             # GNews + Guardian + NewsData (REST)
+
+# ── Translation ───────────────────────────────────────────────
+deep-translator==1.11.4
+
+# ── PDF generation ────────────────────────────────────────────
+fpdf2==2.7.9
+
+# ── Environment ───────────────────────────────────────────────
 python-dotenv==1.0.1
